@@ -1,0 +1,36 @@
+apiVersion: kubescheduler.config.k8s.io/v1
+kind: KubeSchedulerConfiguration
+leaderElection:
+  # (Optional) Change true to false if you are not running a HA control-plane.
+  leaderElect: false
+clientConnection:
+  kubeconfig: /etc/kubernetes/scheduler.conf
+profiles:
+- schedulerName: kcas-scheduler
+  plugins:
+    queueSort:
+      enabled:
+      - name: PrioritySort
+    preFilter:
+      enabled:
+      - name: Volta
+    filter:
+      enabled:
+      - name: Volta
+    preScore:
+      enabled:
+      - name: Volta
+    score:
+      enabled:
+      - name: Volta
+    bind:
+      enabled:
+      - name: DefaultBinder
+    multipoint:
+      disabled:
+      - name: "*"
+    
+  pluginConfig:
+  - name: Volta
+    args:
+      address: "http://localhost:9090"

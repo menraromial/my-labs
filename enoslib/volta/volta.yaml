@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kcas-scheduler
+  namespace: kube-system
+  labels:
+    app.kubernetes.io/name: prometheus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: scheduler
+      tier: control-plane
+  template:
+    metadata:
+      labels:
+        component: scheduler
+        tier: control-plane 
+        app.kubernetes.io/name: prometheus
+    spec:
+      nodeSelector:
+        node-role.kubernetes.io/control-plane: ""
+      tolerations:
+      - key: "node-role.kubernetes.io/control-plane"
+        operator: "Exists"
+        effect: "NoSchedule"
+      containers:
+        - image: ghcr.io/menraromial/volta-scheduler:v0.0.1
+          imagePullPolicy: Always
+          args:
+          - --authentication-kubeconfig=/etc/kubernetes/scheduler.conf
+          - --authorization-kubeconfig=/etc/kubernetes/scheduler.conf
+          - --config=/etc/kubernetes/sched-kcas.yaml
+          - -v=10
+          name: kcas-scheduler
+          resources:
+            requests:
+              cpu: 100m
+          securityContext:
+            privileged: true
+          env:
+          # - name: PROMETHEUS_URL
+          #   value: "http://prometheus.example.com"
+          - name: AGGREGATION_FUNCTION
+            value: "max"
+          - name: RANGE_FUNCTION
+            value: "max_over_time"
+          - name: RATE_FUNCTION
+            value: "rate"
+          - name: RATE_DURATION
+            value: "5m"
+          - name: QUERY_RANGE
+            value: "7d"
+          volumeMounts:
+          - mountPath: /etc/kubernetes
+            name: etckubernetes
+      hostNetwork: false
+      # imagePullSecrets:
+      #   - name: mwr-docker-credentials
+      hostPID: false
+      volumes:
+      - hostPath:
+          path: /etc/kubernetes/
+          type: Directory
+        name: etckubernetes
