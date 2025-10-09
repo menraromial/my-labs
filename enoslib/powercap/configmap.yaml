@@ -14,7 +14,8 @@ data:
   STABILISATION_TIME: "300"
   ALPHA: "4"
   RAPL_MIN_POWER: "20000000"
-  
+  TZ: "Europe/Paris"
+  TIMEZONE: "Europe/Paris"
   # Data provider configuration
   DATA_PROVIDER: "epex"
   PROVIDER_URL: "https://www.epexspot.com/en/market-results"

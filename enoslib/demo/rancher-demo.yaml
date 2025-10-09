@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world
+  annotations:
+    app.volta/name: hello-world
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hello-world
+  template:
+    metadata:
+      labels:
+        app: hello-world
+      annotations:
+        app.volta/name: hello-world
+    spec:
+      schedulerName: volta-scheduler
+      containers:
+        - name: hello-world
+          image: bashofmann/rancher-demo:1.0.0
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "12Mi"
+              cpu: "2m"
+          ports:
+            - containerPort: 8080
+              name: web
+              protocol: TCP
+          env:
+            - name: COW_COLOR
+              value: purple
+          readinessProbe:
+            httpGet:
+              path: /
+              port: web
+          livenessProbe:
+            httpGet:
+              path: /
+              port: web

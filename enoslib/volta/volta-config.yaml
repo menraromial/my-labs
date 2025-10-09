@@ -6,31 +6,36 @@ leaderElection:
 clientConnection:
   kubeconfig: /etc/kubernetes/scheduler.conf
 profiles:
-- schedulerName: kcas-scheduler
+- schedulerName: volta-scheduler
   plugins:
     queueSort:
       enabled:
       - name: PrioritySort
     preFilter:
+      disabled:
+      - name: "*"
       enabled:
       - name: Volta
     filter:
+      disabled:
+      - name: "*"
       enabled:
       - name: Volta
     preScore:
+      disabled:
+      - name: "*"
       enabled:
       - name: Volta
     score:
+      disabled:
+      - name: "*"
       enabled:
       - name: Volta
     bind:
       enabled:
       - name: DefaultBinder
-    multipoint:
-      disabled:
-      - name: "*"
     
-  pluginConfig:
-  - name: Volta
-    args:
-      address: "http://localhost:9090"
+  # pluginConfig:
+  # - name: Volta
+  #   args:
+  #     prometheusAddr: "http://localhost:9090"
