@@ -1,41 +1,172 @@
 apiVersion: kubescheduler.config.k8s.io/v1
 kind: KubeSchedulerConfiguration
-leaderElection:
-  # (Optional) Change true to false if you are not running a HA control-plane.
-  leaderElect: false
 clientConnection:
+  acceptContentTypes: ""
+  burst: 100
+  contentType: application/vnd.kubernetes.protobuf
   kubeconfig: /etc/kubernetes/scheduler.conf
+  qps: 50
+enableContentionProfiling: true
+enableProfiling: true
+leaderElection:
+  leaderElect: false
+  leaseDuration: 15s
+  renewDeadline: 10s
+  resourceLock: leases
+  resourceName: kube-scheduler
+  resourceNamespace: kube-system
+  retryPeriod: 2s
+parallelism: 16
+percentageOfNodesToScore: 0
+podInitialBackoffSeconds: 1
+podMaxBackoffSeconds: 10
 profiles:
-- schedulerName: volta-scheduler
-  plugins:
-    queueSort:
-      enabled:
-      - name: PrioritySort
-    preFilter:
-      disabled:
-      - name: "*"
-      enabled:
+  - schedulerName: volta-scheduler
+    pluginConfig:
+      - name: DefaultPreemption
+        args:
+          apiVersion: kubescheduler.config.k8s.io/v1
+          kind: DefaultPreemptionArgs
+          minCandidateNodesAbsolute: 100
+          minCandidateNodesPercentage: 10
+      - name: InterPodAffinity
+        args:
+          apiVersion: kubescheduler.config.k8s.io/v1
+          kind: InterPodAffinityArgs
+          hardPodAffinityWeight: 1
+          ignorePreferredTermsOfExistingPods: false
+      - name: NodeAffinity
+        args:
+          apiVersion: kubescheduler.config.k8s.io/v1
+          kind: NodeAffinityArgs
+      - name: NodeResourcesBalancedAllocation
+        args:
+          apiVersion: kubescheduler.config.k8s.io/v1
+          kind: NodeResourcesBalancedAllocationArgs
+          resources:
+            - name: cpu
+              weight: 1
+            - name: memory
+              weight: 1
+      - name: NodeResourcesFit
+        args:
+          apiVersion: kubescheduler.config.k8s.io/v1
+          kind: NodeResourcesFitArgs
+          scoringStrategy:
+            resources:
+              - name: cpu
+                weight: 1
+              - name: memory
+                weight: 1
+            type: LeastAllocated
+      - name: PodTopologySpread
+        args:
+          apiVersion: kubescheduler.config.k8s.io/v1
+          kind: PodTopologySpreadArgs
+          defaultingType: System
+      - name: VolumeBinding
+        args:
+          apiVersion: kubescheduler.config.k8s.io/v1
+          kind: VolumeBindingArgs
+          bindTimeoutSeconds: 600
       - name: Volta
-    filter:
-      disabled:
-      - name: "*"
-      enabled:
-      - name: Volta
-    preScore:
-      disabled:
-      - name: "*"
-      enabled:
-      - name: Volta
-    score:
-      disabled:
-      - name: "*"
-      enabled:
-      - name: Volta
-    bind:
-      enabled:
-      - name: DefaultBinder
-    
-  # pluginConfig:
-  # - name: Volta
-  #   args:
-  #     prometheusAddr: "http://localhost:9090"
+        args:
+          apiVersion: kubescheduler.config.k8s.io/v1
+          kind: VoltaArgs
+          prometheusAddress: http://prometheus-k8s.monitoring.svc.cluster.local:9090
+          timeRangeInMinutes: 1
+    plugins:
+      # Phase PreFilter - Désactiver tous sauf Volta et VolumeBinding (nécessaire pour Reserve)
+      preFilter:
+        disabled:
+          - name: NodeResourcesFit
+          - name: NodePorts
+          - name: VolumeRestrictions
+          - name: EBSLimits
+          - name: GCEPDLimits
+          - name: NodeVolumeLimits
+          - name: AzureDiskLimits
+          - name: VolumeZone
+          - name: PodTopologySpread
+          - name: InterPodAffinity
+        enabled:
+          - name: Volta
+          - name: VolumeBinding
+      
+      # Phase Filter - Désactiver tous sauf Volta et VolumeBinding (nécessaire pour Reserve)
+      filter:
+        disabled:
+          - name: NodeUnschedulable
+          - name: NodeName
+          - name: TaintToleration
+          - name: NodeAffinity
+          - name: NodePorts
+          - name: NodeResourcesFit
+          - name: VolumeRestrictions
+          - name: EBSLimits
+          - name: GCEPDLimits
+          - name: NodeVolumeLimits
+          - name: AzureDiskLimits
+          - name: VolumeZone
+          - name: PodTopologySpread
+          - name: InterPodAffinity
+        enabled:
+          - name: Volta
+          - name: VolumeBinding
+      
+      # Phase PreScore - Désactiver tous sauf Volta
+      preScore:
+        disabled:
+          - name: InterPodAffinity
+          - name: PodTopologySpread
+          - name: TaintToleration
+          - name: NodeAffinity
+          - name: NodeResourcesFit
+          - name: NodeResourcesBalancedAllocation
+        enabled:
+          - name: Volta
+      
+      # Phase Score - Désactiver tous sauf Volta, VolumeBinding garde weight 0
+      score:
+        disabled:
+          - name: NodeResourcesBalancedAllocation
+          - name: ImageLocality
+          - name: InterPodAffinity
+          - name: NodeResourcesFit
+          - name: NodeAffinity
+          - name: PodTopologySpread
+          - name: TaintToleration
+        enabled:
+          - name: Volta
+            weight: 1
+          - name: VolumeBinding
+            weight: 0
+      
+      # Garder les plugins par défaut pour les autres phases
+      queueSort:
+        enabled:
+          - name: PrioritySort
+      
+      preEnqueue:
+        enabled:
+          - name: SchedulingGates
+      
+      reserve:
+        enabled:
+          - name: VolumeBinding
+      
+      permit: {}
+      
+      preBind:
+        enabled:
+          - name: VolumeBinding
+      
+      bind:
+        enabled:
+          - name: DefaultBinder
+      
+      postBind: {}
+      
+      postFilter:
+        enabled:
+          - name: DefaultPreemption
