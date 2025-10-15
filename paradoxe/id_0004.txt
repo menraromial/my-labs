@@ -1,0 +1,109 @@
+================================================================================
+📍 WORKER 1: paradoxe-9.rennes.grid5000.fr
+================================================================================
+enabled: 1
+Zone 0
+  name: package-0
+  enabled: 1
+  max_energy_range_uj: 262143328850
+  energy_uj: 94665396266
+  Constraint 0
+    name: long_term
+    power_limit_uw: 150000000
+    time_window_us: 93696
+    max_power_uw: 185000000
+  Constraint 1
+    name: short_term
+    power_limit_uw: 180000000
+    time_window_us: 1952
+    max_power_uw: 652000000
+  Zone 0:0
+    name: dram
+    enabled: 1
+    max_energy_range_uj: 65712999613
+    energy_uj: 41859335407
+    Constraint 0
+      name: long_term
+      power_limit_uw: 30000000
+      time_window_us: 976
+      max_power_uw: 41250000
+Zone 1
+  name: package-1
+  enabled: 1
+  max_energy_range_uj: 262143328850
+  energy_uj: 89295127910
+  Constraint 0
+    name: long_term
+    power_limit_uw: 150000000
+    time_window_us: 93696
+    max_power_uw: 185000000
+  Constraint 1
+    name: short_term
+    power_limit_uw: 180000000
+    time_window_us: 1952
+    max_power_uw: 652000000
+  Zone 1:0
+    name: dram
+    enabled: 1
+    max_energy_range_uj: 65712999613
+    energy_uj: 38598989924
+    Constraint 0
+      name: long_term
+      power_limit_uw: 30000000
+      time_window_us: 976
+      max_power_uw: 41250000
+
+================================================================================
+📍 WORKER 2: paradoxe-25.rennes.grid5000.fr
+================================================================================
+enabled: 1
+Zone 0
+  name: package-0
+  enabled: 1
+  max_energy_range_uj: 262143328850
+  energy_uj: 250466822975
+  Constraint 0
+    name: long_term
+    power_limit_uw: 150000000
+    time_window_us: 93696
+    max_power_uw: 185000000
+  Constraint 1
+    name: short_term
+    power_limit_uw: 180000000
+    time_window_us: 1952
+    max_power_uw: 652000000
+  Zone 0:0
+    name: dram
+    enabled: 1
+    max_energy_range_uj: 65712999613
+    energy_uj: 33009603273
+    Constraint 0
+      name: long_term
+      power_limit_uw: 30000000
+      time_window_us: 976
+      max_power_uw: 41250000
+Zone 1
+  name: package-1
+  enabled: 1
+  max_energy_range_uj: 262143328850
+  energy_uj: 238601491595
+  Constraint 0
+    name: long_term
+    power_limit_uw: 150000000
+    time_window_us: 93696
+    max_power_uw: 185000000
+  Constraint 1
+    name: short_term
+    power_limit_uw: 180000000
+    time_window_us: 1952
+    max_power_uw: 652000000
+  Zone 1:0
+    name: dram
+    enabled: 1
+    max_energy_range_uj: 65712999613
+    energy_uj: 36770250233
+    Constraint 0
+      name: long_term
+      power_limit_uw: 30000000
+      time_window_us: 976
+      max_power_uw: 41250000
