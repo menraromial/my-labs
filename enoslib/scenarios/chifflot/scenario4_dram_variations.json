@@ -1,0 +1,58 @@
+{
+  "name": "Scenario 4: DRAM Power Variations (Chifflot)",
+  "description": "Vary DRAM power limit while keeping CPU at default (125W long / 150W short)",
+  "cluster": "chifflot",
+  "site": "lille",
+  "stress_type": "memory",
+  "default_config": {
+    "long_term_power_uw": 125000000,
+    "long_term_time_us": 999424,
+    "short_term_power_uw": 150000000,
+    "short_term_time_us": 1952,
+    "dram_enabled": true
+  },
+  "experiments": [
+    {
+      "id": "s4_dram_10w",
+      "dram_power_uw": 10000000,
+      "dram_time_us": 976,
+      "description": "DRAM 10W (40% max)"
+    },
+    {
+      "id": "s4_dram_12w",
+      "dram_power_uw": 12000000,
+      "dram_time_us": 976,
+      "description": "DRAM 12W (48% max)"
+    },
+    {
+      "id": "s4_dram_15w",
+      "dram_power_uw": 15000000,
+      "dram_time_us": 976,
+      "description": "DRAM 15W (60% max)"
+    },
+    {
+      "id": "s4_dram_18w",
+      "dram_power_uw": 18000000,
+      "dram_time_us": 976,
+      "description": "DRAM 18W (73% max)"
+    },
+    {
+      "id": "s4_dram_20w",
+      "dram_power_uw": 20000000,
+      "dram_time_us": 976,
+      "description": "DRAM 20W (81% max)"
+    },
+    {
+      "id": "s4_dram_22w",
+      "dram_power_uw": 22000000,
+      "dram_time_us": 976,
+      "description": "DRAM 22W (89% max)"
+    },
+    {
+      "id": "s4_dram_24w",
+      "dram_power_uw": 24000000,
+      "dram_time_us": 976,
+      "description": "DRAM 24W (97% max)"
+    }
+  ]
+}

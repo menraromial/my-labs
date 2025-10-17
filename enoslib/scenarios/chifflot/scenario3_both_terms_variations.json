@@ -1,0 +1,52 @@
+{
+  "name": "Scenario 3: Both Terms Power Variations (Chifflot)",
+  "description": "Vary both long_term and short_term power limits simultaneously",
+  "cluster": "chifflot",
+  "site": "lille",
+  "stress_type": "cpu",
+  "default_config": {
+    "dram_enabled": false
+  },
+  "experiments": [
+    {
+      "id": "s3_low_75_125",
+      "long_term_power_uw": 75000000,
+      "long_term_time_us": 999424,
+      "short_term_power_uw": 125000000,
+      "short_term_time_us": 1952,
+      "description": "Low: 75W long / 125W short"
+    },
+    {
+      "id": "s3_med_100_150",
+      "long_term_power_uw": 100000000,
+      "long_term_time_us": 999424,
+      "short_term_power_uw": 150000000,
+      "short_term_time_us": 1952,
+      "description": "Medium: 100W long / 150W short"
+    },
+    {
+      "id": "s3_default_125_150",
+      "long_term_power_uw": 125000000,
+      "long_term_time_us": 999424,
+      "short_term_power_uw": 150000000,
+      "short_term_time_us": 1952,
+      "description": "Default: 125W long / 150W short"
+    },
+    {
+      "id": "s3_high_125_200",
+      "long_term_power_uw": 125000000,
+      "long_term_time_us": 999424,
+      "short_term_power_uw": 200000000,
+      "short_term_time_us": 1952,
+      "description": "High: 125W long / 200W short"
+    },
+    {
+      "id": "s3_max_125_225",
+      "long_term_power_uw": 125000000,
+      "long_term_time_us": 999424,
+      "short_term_power_uw": 225000000,
+      "short_term_time_us": 1952,
+      "description": "Max: 125W long / 225W short"
+    }
+  ]
+}

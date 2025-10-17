@@ -1,0 +1,32 @@
+{
+  "name": "Scenario 1: Long Term Power Variations (Chifflot)",
+  "description": "Vary long_term power limit while keeping short_term at default (150W)",
+  "cluster": "chifflot",
+  "site": "lille",
+  "stress_type": "cpu",
+  "default_config": {
+    "short_term_power_uw": 150000000,
+    "short_term_time_us": 1952,
+    "dram_enabled": false
+  },
+  "experiments": [
+    {
+      "id": "s1_75w",
+      "long_term_power_uw": 75000000,
+      "long_term_time_us": 999424,
+      "description": "75W long term (60% TDP)"
+    },
+    {
+      "id": "s1_100w",
+      "long_term_power_uw": 100000000,
+      "long_term_time_us": 999424,
+      "description": "100W long term (80% TDP)"
+    },
+    {
+      "id": "s1_125w",
+      "long_term_power_uw": 125000000,
+      "long_term_time_us": 999424,
+      "description": "125W long term (default, 100% TDP)"
+    }
+  ]
+}

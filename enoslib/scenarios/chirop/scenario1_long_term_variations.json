@@ -1,0 +1,43 @@
+{
+  "name": "Scenario 1: Long Term Power Variations",
+  "description": "Vary long_term power limit while keeping short_term at default (300W)",
+  "cluster": "chirop",
+  "site": "lille",
+  "default_config": {
+    "short_term_power_uw": 300000000,
+    "short_term_time_us": 999424,
+    "dram_enabled": false
+  },
+  "experiments": [
+    {
+      "id": "s1_150w",
+      "long_term_power_uw": 150000000,
+      "long_term_time_us": 999424,
+      "description": "150W long term"
+    },
+    {
+      "id": "s1_175w",
+      "long_term_power_uw": 175000000,
+      "long_term_time_us": 999424,
+      "description": "175W long term"
+    },
+    {
+      "id": "s1_200w",
+      "long_term_power_uw": 200000000,
+      "long_term_time_us": 999424,
+      "description": "200W long term"
+    },
+    {
+      "id": "s1_225w",
+      "long_term_power_uw": 225000000,
+      "long_term_time_us": 999424,
+      "description": "225W long term"
+    },
+    {
+      "id": "s1_250w",
+      "long_term_power_uw": 250000000,
+      "long_term_time_us": 999424,
+      "description": "250W long term (default)"
+    }
+  ]
+}

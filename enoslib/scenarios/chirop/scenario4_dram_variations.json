@@ -1,0 +1,57 @@
+{
+  "name": "Scenario 4: DRAM Power Variations",
+  "description": "Vary DRAM power limit while keeping CPU at default (250W long / 300W short)",
+  "cluster": "chirop",
+  "site": "lille",
+  "default_config": {
+    "long_term_power_uw": 250000000,
+    "long_term_time_us": 999424,
+    "short_term_power_uw": 300000000,
+    "short_term_time_us": 999424,
+    "dram_enabled": true
+  },
+  "experiments": [
+    {
+      "id": "s4_dram_20w",
+      "dram_power_uw": 20000000,
+      "dram_time_us": 976,
+      "description": "DRAM 20W"
+    },
+    {
+      "id": "s4_dram_30w",
+      "dram_power_uw": 30000000,
+      "dram_time_us": 976,
+      "description": "DRAM 30W"
+    },
+    {
+      "id": "s4_dram_40w",
+      "dram_power_uw": 40000000,
+      "dram_time_us": 976,
+      "description": "DRAM 40W"
+    },
+    {
+      "id": "s4_dram_50w",
+      "dram_power_uw": 50000000,
+      "dram_time_us": 976,
+      "description": "DRAM 50W"
+    },
+    {
+      "id": "s4_dram_60w",
+      "dram_power_uw": 60000000,
+      "dram_time_us": 976,
+      "description": "DRAM 60W"
+    },
+    {
+      "id": "s4_dram_70w",
+      "dram_power_uw": 70000000,
+      "dram_time_us": 976,
+      "description": "DRAM 70W"
+    },
+    {
+      "id": "s4_dram_80w",
+      "dram_power_uw": 80000000,
+      "dram_time_us": 976,
+      "description": "DRAM 80W (max)"
+    }
+  ]
+}

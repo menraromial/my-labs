@@ -1,0 +1,53 @@
+WORKER 1: chifflot-5.lille.grid5000.fr
+================================================================================
+enabled: 1
+Zone 0
+  name: package-0
+  enabled: 1
+  max_energy_range_uj: 262143328850
+  energy_uj: 44205188958
+  Constraint 0
+    name: long_term
+    power_limit_uw: 125000000
+    time_window_us: 999424
+    max_power_uw: 125000000
+  Constraint 1
+    name: short_term
+    power_limit_uw: 150000000
+    time_window_us: 1952
+    max_power_uw: 264000000
+  Zone 0:0
+    name: dram
+    enabled: 0
+    max_energy_range_uj: 65712999613
+    energy_uj: 2882211919
+    Constraint 0
+      name: long_term
+      power_limit_uw: 0
+      time_window_us: 976
+      max_power_uw: 24750000
+Zone 1
+  name: package-1
+  enabled: 1
+  max_energy_range_uj: 262143328850
+  energy_uj: 42318127077
+  Constraint 0
+    name: long_term
+    power_limit_uw: 125000000
+    time_window_us: 999424
+    max_power_uw: 125000000
+  Constraint 1
+    name: short_term
+    power_limit_uw: 150000000
+    time_window_us: 1952
+    max_power_uw: 264000000
+  Zone 1:0
+    name: dram
+    enabled: 0
+    max_energy_range_uj: 65712999613
+    energy_uj: 3472310367
+    Constraint 0
+      name: long_term
+      power_limit_uw: 0
+      time_window_us: 976
+      max_power_uw: 24750000

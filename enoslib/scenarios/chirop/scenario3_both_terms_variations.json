@@ -1,0 +1,51 @@
+{
+  "name": "Scenario 3: Both Terms Power Variations",
+  "description": "Vary both long_term and short_term power limits simultaneously",
+  "cluster": "chirop",
+  "site": "lille",
+  "default_config": {
+    "dram_enabled": false
+  },
+  "experiments": [
+    {
+      "id": "s3_low_150_250",
+      "long_term_power_uw": 150000000,
+      "long_term_time_us": 999424,
+      "short_term_power_uw": 250000000,
+      "short_term_time_us": 999424,
+      "description": "Low: 150W long / 250W short"
+    },
+    {
+      "id": "s3_med_200_300",
+      "long_term_power_uw": 200000000,
+      "long_term_time_us": 999424,
+      "short_term_power_uw": 300000000,
+      "short_term_time_us": 999424,
+      "description": "Medium: 200W long / 300W short"
+    },
+    {
+      "id": "s3_default_250_300",
+      "long_term_power_uw": 250000000,
+      "long_term_time_us": 999424,
+      "short_term_power_uw": 300000000,
+      "short_term_time_us": 999424,
+      "description": "Default: 250W long / 300W short"
+    },
+    {
+      "id": "s3_high_225_400",
+      "long_term_power_uw": 225000000,
+      "long_term_time_us": 999424,
+      "short_term_power_uw": 400000000,
+      "short_term_time_us": 999424,
+      "description": "High: 225W long / 400W short"
+    },
+    {
+      "id": "s3_max_250_450",
+      "long_term_power_uw": 250000000,
+      "long_term_time_us": 999424,
+      "short_term_power_uw": 450000000,
+      "short_term_time_us": 999424,
+      "description": "Max: 250W long / 450W short"
+    }
+  ]
+}
